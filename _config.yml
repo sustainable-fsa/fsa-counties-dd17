@@ -4,6 +4,10 @@
 url: "https://climate-smart-usda.github.io/fsa-counties-dd17/"  # Your GitHub Pages URL
 baseurl: "/fsa-counties-dd17"
 favicon: /fsa-counties-dd17/favicon.ico
+
 remote_theme: jekyll/minima
 plugins:
   - jekyll-remote-theme
+
+minima:
+  skin: auto
