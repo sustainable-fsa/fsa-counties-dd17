@@ -4,6 +4,6 @@ author: R. Kyle Bocinsky
 url: "https://climate-smart-usda.github.io/fsa-counties-dd17/"  # Your GitHub Pages URL
 baseurl: "/fsa-counties-dd17"
 favicon: favicon.ico
-remote_theme: pages-themes/cayman@v0.2.0
+remote_theme: jekyll/minima
 plugins:
   - jekyll-remote-theme
