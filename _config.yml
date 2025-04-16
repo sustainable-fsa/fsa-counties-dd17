@@ -1,6 +1,6 @@
-# title: FSA_Counties_dd17 Geodatabase Archive
-# description: An archival copy and simplified version of the USDA Farm Service Agency dd17 county boundaries dataset.
-# author: R. Kyle Bocinsky
+title: FSA_Counties_dd17 Geodatabase Archive
+description: An archival copy and simplified version of the USDA Farm Service Agency dd17 county boundaries dataset.
+author: R. Kyle Bocinsky
 url: "https://climate-smart-usda.github.io/fsa-counties-dd17/"  # Your GitHub Pages URL
 baseurl: "/fsa-counties-dd17"
 favicon: /fsa-counties-dd17/favicon.ico
