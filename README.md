@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15232798.svg)](https://doi.org/10.5281/zenodo.15232798)
+[![DOI](https://zenodo.org/badge/967595011.svg)](https://zenodo.org/badge/latestdoi/967595011)
 
 This repository contains an archival copy of the **FSA_Counties_dd17** dataset, originally distributed by the U.S. Department of Agriculture (USDA) Farm Service Agency (FSA) as part of the Common Land Unit (CLU) geospatial data series.
 
