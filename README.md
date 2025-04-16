@@ -114,4 +114,4 @@ This dataset is archived for reference and educational use. It may not reflect c
 
 ## ✉️ Contact
 
-Please contact Kyle Bocinsky ([kyle.bocinsky\@umontana.edu](mailto:kyle.bocinsky@umontana.edu)) with any questions.
+Please contact Kyle Bocinsky ([kyle.bocinsky@umontana.edu](mailto:kyle.bocinsky@umontana.edu)) with any questions.
