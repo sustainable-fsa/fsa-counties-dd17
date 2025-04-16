@@ -15,6 +15,10 @@ This repository contains an archival copy of the **FSA_Counties_dd17** dataset, 
 
 The zipped geodatabase includes polygon features representing U.S. counties, attributed with identifiers used by the FSA for administrative and mapping purposes. It was prepared according to the USDA’s GIS Data Standards.
 
+-   [`FSA_Counties_dd17.gdb.zip`](https://climate-smart-usda.github.io/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip) – Original USDA File Geodatabase
+-   [`fsa-counties-dd17.geojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.geojson) – Simplified GeoJSON version (see below)
+-   [`fsa-counties-dd17.R`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.R) – R script that produces `fsa-counties-dd17.geojson`
+
 ## 🧾 Field Descriptions
 
 | Field Name | Description |
@@ -66,10 +70,6 @@ The GeoJSON file was generated using the R `sf`, `tigris`, and `rmapshaper` pack
 6.  **Final Validations and Export:**\
     Reprojected to EPSG:4326 (OGC:CRS84) for web compatibility, ensured geometry validity, and exported as GeoJSON.
 
-### 📁 File
-
--   `fsa-counties-dd17.geojson` – Simplified and cleaned version for lightweight mapping
-
 ## 📌 Background
 
 The dataset originates from the **dd17** schema, a legacy geospatial data standard used by the USDA Farm Service Agency (FSA) for structuring county-level datasets. It served as a spatial index for county-level geospatial products and was used in conjunction with the **Common Land Unit (CLU)** framework.
@@ -86,7 +86,10 @@ If using this data in published work, consider citing it as:
 
 Data in the `FSA_Counties_dd17.gdb.zip` archive were produced by the United States Department of Agriculture (USDA), which are in the public domain under U.S. law (17 USC § 105).
 
-You are free to: - Use, modify, and distribute the data for any purpose - Include it in derivative works or applications, with or without attribution
+You are free to: 
+
+  - Use, modify, and distribute the data for any purpose 
+  - Include it in derivative works or applications, with or without attribution
 
 If you modify or build upon the data, you are encouraged (but not required) to clearly mark any changes and cite this repository as the source of the original.
 
@@ -105,12 +108,6 @@ This dataset is archived for reference and educational use. It may not reflect c
 1.  Unzip the `FSA_Counties_dd17.gdb.zip` file.
 2.  Open the `.gdb` in a GIS software environment such as [QGIS](https://qgis.org) or [ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview).
 3.  Use the layer properties to explore attributes and spatial coverage.
-
-## 📁 File Information
-
--   [`FSA_Counties_dd17.gdb.zip`](https://climate-smart-usda.github.io/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip) – Original USDA File Geodatabase
--   [`fsa-counties-dd17.geojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.geojson) – Simplified GeoJSON version
--   [`fsa-counties-dd17.R`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.R) – R script that produces `fsa-counties-dd17.geojson`
 
 ## ✉️ Contact
 
