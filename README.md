@@ -4,12 +4,12 @@ This repository contains an archival copy of the **FSA_Counties_dd17** dataset, 
 
 ## 📦 Dataset Overview
 
-- **Title:** FSA_Counties_dd17
-- **Source:** USDA Farm Service Agency (FSA)
-- **Format:** ESRI File Geodatabase (.gdb)
-- **Original Reference:** [USDA FSA GIS Metadata Standards (1-GIS, Amendment 2)](https://www.fsa.usda.gov/Internet/FSA_File/1-gis_r00_a02.pdf)
-- **Distribution Type:** Public archival for research and historical purposes
-- **Date of Archive:** 2025-04-16
+-   **Title:** FSA_Counties_dd17
+-   **Source:** USDA Farm Service Agency (FSA)
+-   **Format:** ESRI File Geodatabase (.gdb)
+-   **Original Reference:** [USDA FSA GIS Metadata Standards (1-GIS, Amendment 2)](https://www.fsa.usda.gov/Internet/FSA_File/1-gis_r00_a02.pdf)
+-   **Distribution Type:** Public archival for research and historical purposes
+-   **Date of Archive:** 2025-04-16
 
 ## 📂 Contents
 
@@ -18,7 +18,7 @@ The zipped geodatabase includes polygon features representing U.S. counties, att
 ## 🧾 Field Descriptions
 
 | Field Name | Description |
-|------------|-------------|
+|-----------------------------------|-------------------------------------|
 | `STPO` | A two-letter USPS abbreviation for the state |
 | `FSA_Name` | The FSA-assigned administrative county name |
 | `FSA_ST` | A two-digit FSA-assigned administrative state code |
@@ -44,30 +44,31 @@ A simplified version of the `FSA_Counties_dd17` dataset is included in this repo
 
 The GeoJSON file was generated using the R `sf`, `tigris`, and `rmapshaper` packages. The following steps were performed:
 
-1. **Read and Select Fields:**  
-   Imported the geodatabase and selected three key fields:
-   - `FSA Code` (`FSA_STCOU`)
-   - `State Name` (`STATENAME`)
-   - `County Name` (`FSA_Name`)
+1.  **Read and Select Fields:**\
+    Imported the geodatabase and selected three key fields:
 
-2. **Simplify Geometry:**  
-   Performed a GeoJSON round-trip to remove curved geometries for geoprocessing.
+    -   `FSA Code` (`FSA_STCOU`)
+    -   `State Name` (`STATENAME`)
+    -   `County Name` (`FSA_Name`)
 
-3. **Group and Summarize:**  
-   Aggregated geometries by unique FSA code and names.
+2.  **Simplify Geometry:**\
+    Performed a GeoJSON round-trip to remove curved geometries for geoprocessing.
 
-4. **Clip:**  
-   Intersected with 500k-resolution TIGER/Line county boundaries, and retained only overlapping features.
+3.  **Group and Summarize:**\
+    Aggregated geometries by unique FSA code and names.
 
-5. **Simplification:**  
-   Used `rmapshaper::ms_simplify()` with a `keep` parameter of 0.015 to reduce vertex complexity while retaining topology.
+4.  **Clip:**\
+    Intersected with 500k-resolution TIGER/Line county boundaries, and retained only overlapping features.
 
-6. **Final Validations and Export:**  
-   Reprojected to EPSG:4326 (OGC:CRS84) for web compatibility, ensured geometry validity, and exported as GeoJSON.
+5.  **Simplification:**\
+    Used `rmapshaper::ms_simplify()` with a `keep` parameter of 0.015 to reduce vertex complexity while retaining topology.
+
+6.  **Final Validations and Export:**\
+    Reprojected to EPSG:4326 (OGC:CRS84) for web compatibility, ensured geometry validity, and exported as GeoJSON.
 
 ### 📁 File
 
-- `fsa-counties-dd17.geojson` – Simplified and cleaned version for lightweight mapping
+-   `fsa-counties-dd17.geojson` – Simplified and cleaned version for lightweight mapping
 
 ## 📌 Background
 
@@ -85,9 +86,7 @@ If using this data in published work, consider citing it as:
 
 Data in the [`FSA_Counties_dd17.gdb.zip`](/FSA_Counties_dd17.gdb.zip) archive were produced by the United States Department of Agriculture (USDA), which are in the public domain under U.S. law (17 USC § 105).
 
-You are free to:
-- Use, modify, and distribute the data for any purpose
-- Include it in derivative works or applications, with or without attribution
+You are free to: - Use, modify, and distribute the data for any purpose - Include it in derivative works or applications, with or without attribution
 
 If you modify or build upon the data, you are encouraged (but not required) to clearly mark any changes and cite this repository as the source of the original.
 
@@ -103,12 +102,24 @@ This dataset is archived for reference and educational use. It may not reflect c
 
 ## 🛠️ How to Use
 
-1. Unzip the `FSA_Counties_dd17.gdb.zip` file.
-2. Open the `.gdb` in a GIS software environment such as [QGIS](https://qgis.org) or [ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview).
-3. Use the layer properties to explore attributes and spatial coverage.
+1.  Unzip the `FSA_Counties_dd17.gdb.zip` file.
+2.  Open the `.gdb` in a GIS software environment such as [QGIS](https://qgis.org) or [ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview).
+3.  Use the layer properties to explore attributes and spatial coverage.
 
 ## 📁 File Information
 
-- `FSA_Counties_dd17.gdb.zip` – Original USDA File Geodatabase
-- `fsa-counties-dd17.geojson` – Simplified GeoJSON version
-- `fsa-counties-dd17.R` – R script that produces `fsa-counties-dd17.geojson`
+-   `FSA_Counties_dd17.gdb.zip` – Original USDA File Geodatabase
+-   `fsa-counties-dd17.geojson` – Simplified GeoJSON version
+-   `fsa-counties-dd17.R` – R script that produces `fsa-counties-dd17.geojson`
+
+## ✉️ Contact
+
+Please contact Kyle Bocinsky ([kyle.bocinsky\@umontana.edu](mailto:kyle.bocinsky@umontana.edu)) with any questions.
+
+<br>
+
+<p align="center">
+
+<a href="https://climate.umt.edu" target="_blank"> <img src="/MCO_logo_icon_only.png" alt="The Montana Climate Office logo." width="350"/> </a>
+
+</p>
