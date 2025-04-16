@@ -115,11 +115,3 @@ This dataset is archived for reference and educational use. It may not reflect c
 ## ✉️ Contact
 
 Please contact Kyle Bocinsky ([kyle.bocinsky\@umontana.edu](mailto:kyle.bocinsky@umontana.edu)) with any questions.
-
-<br>
-
-<p align="center">
-
-<a href="https://climate.umt.edu" target="_blank"> <img src="/MCO_logo_icon_only.png" alt="The Montana Climate Office logo." width="350"/> </a>
-
-</p>
