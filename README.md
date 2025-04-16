@@ -84,7 +84,7 @@ If using this data in published work, consider citing it as:
 
 ## 📄 License
 
-Data in the [`FSA_Counties_dd17.gdb.zip`](/FSA_Counties_dd17.gdb.zip) archive were produced by the United States Department of Agriculture (USDA), which are in the public domain under U.S. law (17 USC § 105).
+Data in the [`FSA_Counties_dd17.gdb.zip`](FSA_Counties_dd17.gdb.zip) archive were produced by the United States Department of Agriculture (USDA), which are in the public domain under U.S. law (17 USC § 105).
 
 You are free to: - Use, modify, and distribute the data for any purpose - Include it in derivative works or applications, with or without attribution
 
@@ -92,9 +92,9 @@ If you modify or build upon the data, you are encouraged (but not required) to c
 
 > No warranty is provided. Use at your own risk.
 
-The derivative [`fsa-counties-dd17.geojson`](/fsa-counties-dd17.geojson) was created by R. Kyle Bocinsky and is released under the [Creative Commons CCZero license](https://creativecommons.org/publicdomain/zero/1.0/).
+The derivative [`fsa-counties-dd17.geojson`](fsa-counties-dd17.geojson) was created by R. Kyle Bocinsky and is released under the [Creative Commons CCZero license](https://creativecommons.org/publicdomain/zero/1.0/).
 
-The [`fsa-counties-dd17.R`](/fsa-counties-dd17.R) script is copyright R. Kyle Bocinsky, and is released under the [MIT License](/LICENSE).
+The [`fsa-counties-dd17.R`](fsa-counties-dd17.R) script is copyright R. Kyle Bocinsky, and is released under the [MIT License](LICENSE).
 
 ## ⚠️ Disclaimer
 
@@ -108,9 +108,9 @@ This dataset is archived for reference and educational use. It may not reflect c
 
 ## 📁 File Information
 
--   `FSA_Counties_dd17.gdb.zip` – Original USDA File Geodatabase
--   `fsa-counties-dd17.geojson` – Simplified GeoJSON version
--   `fsa-counties-dd17.R` – R script that produces `fsa-counties-dd17.geojson`
+-   [`FSA_Counties_dd17.gdb.zip`](`FSA_Counties_dd17.gdb.zip) – Original USDA File Geodatabase
+-   [`fsa-counties-dd17.geojson`](fsa-counties-dd17.geojson) – Simplified GeoJSON version
+-   [`fsa-counties-dd17.R`](fsa-counties-dd17.R) – R script that produces `fsa-counties-dd17.geojson`
 
 ## ✉️ Contact
 
