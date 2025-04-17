@@ -3,7 +3,6 @@ description: An archival copy and simplified version of the USDA Farm Service Ag
 author: R. Kyle Bocinsky
 url: "https://climate-smart-usda.github.io/fsa-counties-dd17/"  # Your GitHub Pages URL
 baseurl: "/fsa-counties-dd17"
-favicon: /fsa-counties-dd17/favicon.ico
 
 remote_theme: jekyll/minima
 plugins:
