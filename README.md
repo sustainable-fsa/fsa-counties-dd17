@@ -70,6 +70,12 @@ The GeoJSON file was generated using the R `sf`, `tigris`, and `rmapshaper` pack
 
 6.  **Final Validations and Export:**\
     Reprojected to EPSG:4326 (OGC:CRS84) for web compatibility, ensured geometry validity, and exported as GeoJSON.
+    
+## 🛠️ How to Use
+
+1.  Unzip the `FSA_Counties_dd17.gdb.zip` file.
+2.  Open the `.gdb` in a GIS software environment such as [QGIS](https://qgis.org) or [ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview).
+3.  Use the layer properties to explore attributes and spatial coverage.
 
 ## 📌 Background
 
@@ -104,12 +110,6 @@ The [`fsa-counties-dd17.R`](fsa-counties-dd17.R) script is copyright R. Kyle Boc
 
 This dataset is archived for reference and educational use. It may not reflect current administrative boundaries and should not be used for official USDA program administration. Always consult the USDA or state FSA office for current data.
 
-## 🛠️ How to Use
-
-1.  Unzip the `FSA_Counties_dd17.gdb.zip` file.
-2.  Open the `.gdb` in a GIS software environment such as [QGIS](https://qgis.org) or [ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview).
-3.  Use the layer properties to explore attributes and spatial coverage.
-
 ## 👏 Acknowledgment
 
 This work is part of the [*Enhancing Climate-smart Disaster Relief in FSA Programs: Non-stationarity at the Intersection of Normal Grazing Periods and US Drought Assessment*](https://www.ars.usda.gov/research/project/?accnNo=444612) project. It is supported by US Department of Agriculture Office of the Chief Economist (OCE), Office of Energy and Environmental Policy (OEEP) funds passed through to Research, Education, and Economics mission area. We also acknowledge and appreciate the assistance of the USDA Climate Hubs in securing these data.
@@ -117,4 +117,3 @@ This work is part of the [*Enhancing Climate-smart Disaster Relief in FSA Progra
 ## ✉️ Contact
 
 Please contact Kyle Bocinsky ([kyle.bocinsky@umontana.edu](mailto:kyle.bocinsky@umontana.edu)) with any questions.
-
