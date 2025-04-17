@@ -1,4 +1,4 @@
-![GitHub Release](https://img.shields.io/github/v/release/climate-smart-usda/fsa-counties-dd17?color=%239c27b0)
+![GitHub Release](https://img.shields.io/github/v/release/climate-smart-usda/fsa-counties-dd17?color=%239c27b0&link=https%3A%2F%2Fgithub.com%2Fclimate-smart-usda%2Ffsa-counties-dd17)
 [![DOI](https://zenodo.org/badge/967595011.svg)](https://zenodo.org/badge/latestdoi/967595011)
 
 This repository contains an archival copy of the **FSA_Counties_dd17** dataset, originally distributed by the U.S. Department of Agriculture (USDA) Farm Service Agency (FSA) as part of the Common Land Unit (CLU) geospatial data series.
