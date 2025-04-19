@@ -16,6 +16,12 @@ library(rmapshaper)
 ## The FSA county definitions
 ## Create a simplified version
 sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
+  dplyr::filter(!(STATENAME %in%
+                    c("American Samoa",
+                      "Northern Mariana Islands",
+                      "Guam",
+                      "Virgin Islands of the U.S."))) %>%
+  dplyr::select(id = FSA_STCOU) %>%
   {
     # Round-trip to geojson to get rid of strange curved geometry
     tmp <- tempfile(fileext = ".geojson")
@@ -29,33 +35,34 @@ sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
     tigris::counties(cb = TRUE) %>%
       sf::st_union() %>%
       sf::st_transform("EPSG:5070")
-  ) %>%
-  #presimplify
-  rmapshaper::ms_simplify() %>%
-  sf::st_make_valid() %>%
-  sf::st_transform("EPSG:4326") %>%
-  dplyr::filter(!(STATENAME %in%
-                    c("American Samoa",
-                      "Northern Mariana Islands",
-                      "Guam",
-                      "Virgin Islands of the U.S."))) %>%
-  dplyr::select(id = FSA_STCOU) %>%
+  )  %>%
   dplyr::group_by(id) %>%
   dplyr::summarise(.groups = "drop") %>%
   sf::st_cast("MULTIPOLYGON") %>%
-  sf::st_make_valid() %T>%
+  sf::st_make_valid() %>%
+  sf::st_cast("MULTIPOLYGON") %>%
+  #presimplify
+  rmapshaper::ms_simplify(keep = 0.015) %>%
+  sf::st_make_valid() %>%
+  sf::st_cast("MULTIPOLYGON") %>%
+  sf::st_cast("POLYGON") %>%
+  dplyr::group_by(id) %>%
+  dplyr::summarise(.groups = "drop") %>%
+  sf::st_transform("EPSG:4326") %T>%
   geojsonio::geojson_write(input = ., 
                            file = "fsa-counties-dd17.geojson",
                            object_name = "counties",
                            convert_wgs84 = FALSE,
                            crs = 4326,
                            overwrite = TRUE) %>%
+  sf::st_cast("MULTIPOLYGON") %>%
+  sf::st_cast("POLYGON") %>%
   tigris::shift_geometry() %>%
   sf::st_make_valid() %>%
   sf::st_transform("EPSG:4326") %>%
   sf::st_make_valid() %>%
-  sf::st_cast("MULTIPOLYGON") %>%
-  sf::st_make_valid() %>%
+  dplyr::group_by(id) %>%
+  dplyr::summarise(.groups = "drop") %>%
   geojsonio::geojson_write(input = ., 
                            file = "fsa-counties-dd17-albers.geojson",
                            object_name = "counties",
