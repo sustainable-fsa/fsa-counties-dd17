@@ -46,8 +46,8 @@ sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
   sf::st_make_valid() %>%
   sf::st_cast("MULTIPOLYGON") %>%
   sf::st_cast("POLYGON") %>%
-  dplyr::group_by(id) %>%
-  dplyr::summarise(.groups = "drop") %>%
+  # dplyr::group_by(id) %>%
+  # dplyr::summarise(.groups = "drop") %>%
   sf::st_transform("EPSG:4326") %T>%
   geojsonio::geojson_write(input = ., 
                            file = "fsa-counties-dd17.geojson",
@@ -60,9 +60,9 @@ sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
   tigris::shift_geometry() %>%
   sf::st_make_valid() %>%
   sf::st_transform("EPSG:4326") %>%
-  sf::st_make_valid() %>%
-  dplyr::group_by(id) %>%
-  dplyr::summarise(.groups = "drop") %>%
+  sf::st_make_valid() %T>%
+  # dplyr::group_by(id) %>%
+  # dplyr::summarise(.groups = "drop") %>%
   geojsonio::geojson_write(input = ., 
                            file = "fsa-counties-dd17-albers.geojson",
                            object_name = "counties",
