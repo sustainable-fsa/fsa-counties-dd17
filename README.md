@@ -17,8 +17,8 @@ This repository contains an archival copy of the **FSA_Counties_dd17** dataset, 
 The zipped geodatabase includes polygon features representing U.S. counties, attributed with identifiers used by the FSA for administrative and mapping purposes. It was prepared according to the USDA’s GIS Data Standards.
 
 -   [`FSA_Counties_dd17.gdb.zip`](https://climate-smart-usda.github.io/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip) – Original USDA File Geodatabase
--   [`fsa-counties-dd17.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.geojson) – Simplified TopoJSON version (see below)
--   [`fsa-counties-dd17-albers.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.geojson) – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico (see below)
+-   [`fsa-counties-dd17.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson) – Simplified TopoJSON version (see below)
+-   [`fsa-counties-dd17-albers.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17-albers.topojson) – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico (see below)
 -   [`fsa-counties-dd17.R`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.R) – R script that produces the Simplified TopoJSON versions
 
 ## 🧾 Field Descriptions
