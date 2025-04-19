@@ -41,7 +41,9 @@ sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
                       "Virgin Islands of the U.S."))) %>%
   dplyr::select(id = FSA_STCOU) %>%
   dplyr::group_by(id) %>%
-  dplyr::summarise(.groups = "drop") %T>%
+  dplyr::summarise(.groups = "drop") %>%
+  sf::st_cast("MULTIPOLYGON") %>%
+  sf::st_make_valid() %T>%
   geojsonio::geojson_write(input = ., 
                            file = "fsa-counties-dd17.geojson",
                            object_name = "counties",
@@ -51,6 +53,9 @@ sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
   tigris::shift_geometry() %>%
   sf::st_make_valid() %>%
   sf::st_transform("EPSG:4326") %>%
+  sf::st_make_valid() %>%
+  sf::st_cast("MULTIPOLYGON") %>%
+  sf::st_make_valid() %>%
   geojsonio::geojson_write(input = ., 
                            file = "fsa-counties-dd17-albers.geojson",
                            object_name = "counties",
@@ -79,9 +84,9 @@ geojson_to_topojson() {
     > "$NDJSON"
 
   echo "🧭 Building TopoJSON → $TOPOJSON"
-  geo2topo -q 1e5 -n "${BASE}=${NDJSON}" \\
+  geo2topo -q 1e5 -n counties="${NDJSON}" \\
     | toposimplify -f -s 1e-7 \\
-    | topomerge states="${BASE}" -k "d.id.slice(0,2)" \\
+    | topomerge states=counties -k "d.id.slice(0,2)" \\
     | topomerge nation=states \\
     > "$TOPOJSON"
 
