@@ -32,7 +32,7 @@ counties <-
   rmapshaper::ms_dissolve(field = "id",
                           sys = TRUE,
                           sys_mem = 16) %>%
-  rmapshaper::ms_simplify(keep = 0.01,
+  rmapshaper::ms_simplify(keep = 0.008,
                           sys = TRUE,
                           sys_mem = 16) %>%
   rmapshaper::ms_clip( 
@@ -65,7 +65,15 @@ counties <-
                           sys = TRUE,
                           sys_mem = 16) %>%
   sf::st_cast("MULTIPOLYGON") %>%
-  dplyr::arrange(id) %T>%
+  dplyr::arrange(id) %>%
+  dplyr::left_join(
+    sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
+      sf::st_drop_geometry() %>%
+      dplyr::select(id = FSA_STCOU,
+                    state = STATENAME,
+                    county = FSA_Name) %>%
+      dplyr::distinct()
+  ) %T>%
   sf::write_sf("fsa-counties-dd17.geojson",
                delete_dsn = TRUE)
 
@@ -75,14 +83,14 @@ mapshaper \\
   fsa-counties-dd17.geojson \\
   -clean rewind \\
   -rename-layers counties,states \\
-  -each 'state=id.slice(0,2)' \\
-  -dissolve field=state + name=states \\
+  -dissolve field=state copy-fields='id' + name=states \\
+  -each 'id=id.slice(0,2)' target=states \\
   -rename-layers counties,states \\
-  -o format=topojson quantization=1e5 target=* fsa-counties-dd17.topojson
+  -o format=topojson quantization=1e5 fix-geometry id-field='id' bbox target=* fsa-counties-dd17.topojson
 "
 )
 
 unlink("fsa-counties-dd17.geojson")
 
-# sf::read_sf("fsa-counties-dd17-albers.topojson", layer = "counties") %>%
+# sf::read_sf("fsa-counties-dd17.topojson", layer = "states") %>%
 #   mapview::mapview()
