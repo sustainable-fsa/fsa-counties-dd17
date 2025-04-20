@@ -17,8 +17,7 @@ This repository contains an archival copy of the **FSA_Counties_dd17** dataset, 
 The zipped geodatabase includes polygon features representing U.S. counties, attributed with identifiers used by the FSA for administrative and mapping purposes. It was prepared according to the USDA’s GIS Data Standards.
 
 -   [`FSA_Counties_dd17.gdb.zip`](https://climate-smart-usda.github.io/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip) – Original USDA File Geodatabase
--   [`fsa-counties-dd17.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson) – Simplified TopoJSON version (see below)
--   [`fsa-counties-dd17-albers.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17-albers.topojson) – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico (see below)
+-   [`fsa-counties-dd17.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson) – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico (see below)
 -   [`fsa-counties-dd17.R`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.R) – R script that produces the Simplified TopoJSON versions
 
 ## 🧾 Field Descriptions
@@ -48,35 +47,57 @@ A simplified version of the `FSA_Counties_dd17` dataset is included in this repo
 
 ### 🔧 Processing Steps
 
-The GeoJSON file was generated using the R `sf`, `tigris`, and `rmapshaper` packages, along with command line topojson tools. The following steps were performed:
+This workflow processes the USDA Farm Service Agency (FSA) county definitions to produce a clean, simplified, and TopoJSON-compatible version of the dataset, suitable for use in web mapping applications.
 
-1. **Ingest and normalize FSA county definitions**  
-   - Reads the zipped File Geodatabase (`/vsizip/FSA_Counties_dd17.gdb.zip`).  
-   - Round‑trips through a temporary GeoJSON to flatten any curved geometries.  
-   - Ensures all geometries are valid.
+#### 1. Load and Preprocess FSA County Data
+- Load the original county boundaries from a zipped file geodatabase:  
+  `FSA_Counties_dd17.gdb.zip`
+- Exclude U.S. territories by filtering out counties with `FIPSST` codes:
+  - American Samoa (`60`), Guam (`66`), Northern Mariana Islands (`69`), Puerto Rico (`72`), U.S. Virgin Islands (`78`), etc.
+- Retain only the `FSA_STCOU` field and rename it to `id` for clarity.
 
-2. **Project, clip and simplify**  
-   - Reprojects to Conus Albers (EPSG:5070).  
-   - Clips to the union of all U.S. counties (dropping out‑of‑bounds pieces).  
-   - Simplifies topology with Mapshaper, repairs any invalid geometries, then reprojects back to WGS84 (EPSG:4326).
+#### 2. Normalize Geometries
+- Perform a **round-trip** to GeoJSON:
+  - Write the filtered data to a temporary `.geojson` file.
+  - Read it back into R using `sf::read_sf()`.
+- This step removes non-standard geometries (e.g., curved edges or arcs) that may interfere with simplification or projection.
 
-3. **Dissolve and filter**  
-   - Excludes non‑contiguous U.S. territories (American Samoa, Guam, etc.).  
-   - Keeps only the `FSA_STCOU` field (renamed to `id`).  
-   - Dissolves by `id` so each FSA code is a single polygon.
+#### 3. Transform and Simplify Geometries
+- Project all features to the WGS84 coordinate reference system.
+- Use `rmapshaper::ms_explode()` to break multi-part polygons into single-part features.
+- Recombine features by `id` using `ms_dissolve()` to ensure unique county geometries.
+- Apply `ms_simplify(keep = 0.01)` to reduce geometric complexity while preserving topology.
 
-4. **Export GeoJSON files**  
-   - Writes **fsa‑counties‑dd17.geojson** (raw geographic layout).  
-   - Applies `tigris::shift_geometry()` to inset Alaska/Hawaii, then writes **fsa‑counties‑dd17‑albers.geojson**.
+#### 4. Clip to Official TIGER/Line Boundaries
+- Download generalized U.S. county boundaries via the `tigris` package:
+  - Use `cb = TRUE` and `resolution = "5m"` for cartographic accuracy.
+- Use `ms_explode()` and `ms_dissolve()` to produce a clean national boundary.
+- Clip FSA geometries to the national boundary using `ms_clip()`, removing slivers and enforcing alignment.
 
-5. **Inline TopoJSON conversion & cleanup**  
-   Inside a single `system()` call, the script:
-   - **Defines** a shell function `geojson_to_topojson()` that:
-     1. Derives base names: strips `.geojson` to get `<base>`, sets `<base>.ndjson` and `<base>.topojson`.  
-     2. **Converts GeoJSON → NDJSON** via `geojson2ndjson` + `ndjson-map` (extracting each feature’s `id`).  
-     3. **Builds TopoJSON** with `geo2topo`, `toposimplify`, and two `topomerge` steps (first into states, then nation).  
-     4. **Removes** the original `.geojson` and intermediate `.ndjson`.  
-   - **Invokes** `geojson_to_topojson` on both `fsa-counties-dd17.geojson` and `fsa-counties-dd17-albers.geojson`.
+#### 5. Further Geometry Cleaning
+- Use `sf::st_make_valid()` to repair any topological errors.
+- Repeat explode/dissolve operations as needed to clean up geometry structure.
+- Reposition Alaska, Hawaii, and outlying areas using `tigris::shift_geometry()` for optimal layout in web maps.
+- Convert all features to `MULTIPOLYGON` geometries.
+- Sort features by `id` to ensure consistent ordering.
+
+#### 6. Export Cleaned Data
+- Save the cleaned and simplified geometries to `fsa-counties-dd17.geojson`.
+
+#### 7. Post-process with Mapshaper (CLI)
+- Use Mapshaper to:
+  - Clean and reorient geometry: `-clean rewind`
+  - Derive a new `state` field from the first two characters of `id`:  
+    `-each 'state=id.slice(0,2)'`
+  - Merge counties into states: `-dissolve field=state`
+  - Rename layers: `counties` and `states`
+  - Quantize coordinates for TopoJSON compression: `quantization=1e5`
+- Export the result as `fsa-counties-dd17.topojson`.
+
+#### 8. Cleanup
+- Remove the temporary GeoJSON file to tidy the workspace.
+
+---
 
 ## 🛠️ How to Use
 
