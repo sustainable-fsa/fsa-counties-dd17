@@ -1,6 +1,6 @@
 
 [![GitHub
-Release](https://img.shields.io/github/v/release/climate-smart-usda/fsa-counties-dd17?label=GitHub%20Release&color=%239c27b0)](https://github.com/climate-smart-usda/fsa-counties-dd17)
+Release](https://img.shields.io/github/v/release/sustainable-fsa/fsa-counties-dd17?label=GitHub%20Release&color=%239c27b0)](https://github.com/sustainable-fsa/fsa-counties-dd17)
 [![DOI](https://zenodo.org/badge/967595011.svg)](https://zenodo.org/badge/latestdoi/967595011)
 
 This repository contains an archival copy of the **FSA_Counties_dd17**
@@ -27,12 +27,12 @@ counties, attributed with identifiers used by the FSA for administrative
 and mapping purposes. It was prepared according to the USDA’s GIS Data
 Standards.
 
-- [`FSA_Counties_dd17.gdb.zip`](https://climate-smart-usda.github.io/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip)
+- [`FSA_Counties_dd17.gdb.zip`](https://sustainable-fsa.github.io/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip)
   – Original USDA File Geodatabase
-- [`fsa-counties-dd17.topojson`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson)
+- [`fsa-counties-dd17.topojson`](https://sustainable-fsa.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson)
   – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico
   (see below)
-- [`fsa-counties-dd17.R`](https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.R)
+- [`fsa-counties-dd17.R`](https://sustainable-fsa.github.io/fsa-counties-dd17/fsa-counties-dd17.R)
   – R script that produces the Simplified TopoJSON versions
 
 ## 🧾 Field Descriptions
@@ -162,7 +162,7 @@ library(rmapshaper) # For innerlines function
 
 ## Download the FSA_Counties_dd17 archive
 counties <- 
-  sf::read_sf("https://climate-smart-usda.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson",
+  sf::read_sf("https://sustainable-fsa.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson",
               layer = "counties") |>
   sf::st_set_crs("EPSG:4326") |>
   sf::st_transform("EPSG:5070")
@@ -253,7 +253,7 @@ FSA office for current data.
 
 ## 👏 Acknowledgment
 
-This work is part of the [*Enhancing Climate-smart Disaster Relief in
+This work is part of the [*Enhancing Sustainable Disaster Relief in
 FSA Programs: Non-stationarity at the Intersection of Normal Grazing
 Periods and US Drought
 Assessment*](https://www.ars.usda.gov/research/project/?accnNo=444612)
