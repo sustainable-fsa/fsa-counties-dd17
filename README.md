@@ -210,14 +210,17 @@ particularly for referencing USDA program boundaries, disaster
 assistance eligibility, and other geospatial analysis across agriculture
 and conservation.
 
-## 📜 Citation
+## 📝 Citation
 
-If using this data in published work, consider citing it as:
+If you use this data in published work, please cite:
 
-> USDA Farm Service Agency. *FSA_Counties_dd17 Geospatial Dataset*.
-> Accessed via GitHub archive, YYYY. Original metadata reference: [1-GIS
-> Amendment 2
-> (2009)](https://www.fsa.usda.gov/Internet/FSA_File/1-gis_r00_a02.pdf).
+> USDA Farm Service Agency. *FSA_Counties_dd17 Geospatial Dataset*. Curated and archived by R. Kyle Bocinsky, Montana Climate Office, University of Montana. Sustainable FSA project. Accessed YYYY-MM-DD. <https://sustainable-fsa.com/fsa-counties-dd17/>
+
+Machine-readable metadata are in [`CITATION.cff`](CITATION.cff); GitHub's **Cite this repository** button (top right of the repo page) renders it as APA or BibTeX.
+
+Original metadata reference: [1-GIS Amendment 2 (2009)](https://www.fsa.usda.gov/Internet/FSA_File/1-gis_r00_a02.pdf).
+
+**Acknowledgment**: This work is part of the [*Enhancing Sustainable Disaster Relief in FSA Programs*](https://www.ars.usda.gov/research/project/?accnNo=444612) project, supported by the USDA Office of the Chief Economist, Office of Energy and Environmental Policy, and the USDA Climate Hubs.
 
 ## 📄 License
 
