@@ -27,12 +27,12 @@ counties, attributed with identifiers used by the FSA for administrative
 and mapping purposes. It was prepared according to the USDA’s GIS Data
 Standards.
 
-- [`FSA_Counties_dd17.gdb.zip`](https://sustainable-fsa.github.io/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip)
+- [`FSA_Counties_dd17.gdb.zip`](https://data.sustainable-fsa.com/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip)
   – Original USDA File Geodatabase
-- [`fsa-counties-dd17.topojson`](https://sustainable-fsa.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson)
+- [`fsa-counties-dd17.topojson`](https://data.sustainable-fsa.com/fsa-counties-dd17/fsa-counties-dd17.topojson)
   – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico
   (see below)
-- [`fsa-counties-dd17.R`](https://sustainable-fsa.github.io/fsa-counties-dd17/fsa-counties-dd17.R)
+- [`fsa-counties-dd17.R`](https://sustainable-fsa.com/fsa-counties-dd17/fsa-counties-dd17.R)
   – R script that produces the Simplified TopoJSON versions
 
 ## 🧾 Field Descriptions
@@ -71,7 +71,7 @@ version of the dataset, suitable for use in web mapping applications.
 
 #### 1. Load and Preprocess FSA County Data
 
-- Load the original county boundaries from a zipped file geodatabase:  
+- Load the original county boundaries from a zipped file geodatabase:\
   `FSA_Counties_dd17.gdb.zip`
 - Exclude U.S. territories by filtering out counties with `FIPSST`
   codes:
@@ -125,7 +125,7 @@ version of the dataset, suitable for use in web mapping applications.
 
 - Use Mapshaper to:
   - Clean and reorient geometry: `-clean rewind`
-  - Derive a new `state` field from the first two characters of `id`:  
+  - Derive a new `state` field from the first two characters of `id`:\
     `-each 'state=id.slice(0,2)'`
   - Merge counties into states: `-dissolve field=state`
   - Rename layers: `counties` and `states`
@@ -162,7 +162,7 @@ library(rmapshaper) # For innerlines function
 
 ## Download the FSA_Counties_dd17 archive
 counties <- 
-  sf::read_sf("https://sustainable-fsa.github.io/fsa-counties-dd17/fsa-counties-dd17.topojson",
+  sf::read_sf("https://data.sustainable-fsa.com/fsa-counties-dd17/fsa-counties-dd17.topojson",
               layer = "counties") |>
   sf::st_set_crs("EPSG:4326") |>
   sf::st_transform("EPSG:5070")
@@ -192,7 +192,7 @@ ggplot(counties) +
   theme_void()
 ```
 
-<img src="./example-1.png" style="display: block; margin: auto;" />
+<img src="./example-1.png" alt="" style="display: block; margin: auto;" />
 
 ------------------------------------------------------------------------
 
@@ -214,13 +214,23 @@ and conservation.
 
 If you use this data in published work, please cite:
 
-> USDA Farm Service Agency. *FSA_Counties_dd17 Geospatial Dataset*. Curated and archived by R. Kyle Bocinsky, Montana Climate Office, University of Montana. Sustainable FSA project. Accessed YYYY-MM-DD. <https://sustainable-fsa.com/fsa-counties-dd17/>
+> USDA Farm Service Agency. *FSA_Counties_dd17 Geospatial Dataset*.
+> Curated and archived by R. Kyle Bocinsky, Montana Climate Office,
+> University of Montana. Sustainable FSA project. Accessed YYYY-MM-DD.
+> <https://sustainable-fsa.com/fsa-counties-dd17/>
 
-Machine-readable metadata are in [`CITATION.cff`](CITATION.cff); GitHub's **Cite this repository** button (top right of the repo page) renders it as APA or BibTeX.
+Machine-readable metadata are in [`CITATION.cff`](CITATION.cff);
+GitHub’s **Cite this repository** button (top right of the repo page)
+renders it as APA or BibTeX.
 
-Original metadata reference: [1-GIS Amendment 2 (2009)](https://www.fsa.usda.gov/Internet/FSA_File/1-gis_r00_a02.pdf).
+Original metadata reference: [1-GIS Amendment 2
+(2009)](https://www.fsa.usda.gov/Internet/FSA_File/1-gis_r00_a02.pdf).
 
-**Acknowledgment**: This work is part of the [*Enhancing Sustainable Disaster Relief in FSA Programs*](https://www.ars.usda.gov/research/project/?accnNo=444612) project, supported by the USDA Office of the Chief Economist, Office of Energy and Environmental Policy, and the USDA Climate Hubs.
+**Acknowledgment**: This work is part of the [*Enhancing Sustainable
+Disaster Relief in FSA
+Programs*](https://www.ars.usda.gov/research/project/?accnNo=444612)
+project, supported by the USDA Office of the Chief Economist, Office of
+Energy and Environmental Policy, and the USDA Climate Hubs.
 
 ## 📄 License
 
@@ -256,9 +266,9 @@ FSA office for current data.
 
 ## 👏 Acknowledgment
 
-This work is part of the [*Enhancing Sustainable Disaster Relief in
-FSA Programs: Non-stationarity at the Intersection of Normal Grazing
-Periods and US Drought
+This work is part of the [*Enhancing Sustainable Disaster Relief in FSA
+Programs: Non-stationarity at the Intersection of Normal Grazing Periods
+and US Drought
 Assessment*](https://www.ars.usda.gov/research/project/?accnNo=444612)
 project. It is supported by US Department of Agriculture Office of the
 Chief Economist (OCE), Office of Energy and Environmental Policy (OEEP)
