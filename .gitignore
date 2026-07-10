@@ -4,3 +4,7 @@
 .Rdata
 .httr-oauth
 .quarto
+
+# S3-hosted data (purged from git history 2026-07; archive of record:
+# https://data.sustainable-fsa.com/fsa-counties-dd17/)
+FSA_Counties_dd17.gdb.zip
