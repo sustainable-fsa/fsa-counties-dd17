@@ -171,6 +171,8 @@ While the dataset may no longer be updated or actively distributed by the USDA, 
 If you use this data in published work, please cite:
 
 > USDA Farm Service Agency. *FSA_Counties_dd17 Geospatial Dataset*. Curated and archived by R. Kyle Bocinsky, Montana Climate Office, University of Montana. Sustainable FSA project. Accessed YYYY-MM-DD. <https://sustainable-fsa.com/fsa-counties-dd17/>
+>
+> DOI: <https://doi.org/10.5281/zenodo.15232797>
 
 Machine-readable metadata are in [`CITATION.cff`](CITATION.cff); GitHub's **Cite this repository** button (top right of the repo page) renders it as APA or BibTeX.
 
