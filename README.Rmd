@@ -26,7 +26,15 @@ The zipped geodatabase includes polygon features representing U.S. counties, att
 
 -   [`FSA_Counties_dd17.gdb.zip`](https://data.sustainable-fsa.com/fsa-counties-dd17/FSA_Counties_dd17.gdb.zip) – Original USDA File Geodatabase
 -   [`fsa-counties-dd17.topojson`](https://data.sustainable-fsa.com/fsa-counties-dd17/fsa-counties-dd17.topojson) – Simplified TopoJSON version with pre-inset Alaska/Hawaii/Puerto Rico (see below)
+-   [`fsa-counties-dd17.parquet`](https://data.sustainable-fsa.com/fsa-counties-dd17/fsa-counties-dd17.parquet) – Parquet version of the full (non-simplified) geodatabase
 -   [`fsa-counties-dd17.R`](https://sustainable-fsa.com/fsa-counties-dd17/fsa-counties-dd17.R) – R script that produces the Simplified TopoJSON versions
+-   [`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd17/_manifest.txt) – flat index of every file in the S3-hosted mirror
+
+## ☁️ Archive Hosting & Automated Publishing
+
+This repository dual-writes its archive: the geodatabase, TopoJSON, and Parquet outputs are all committed to git *and* mirrored to S3, served via CloudFront at <https://data.sustainable-fsa.com/fsa-counties-dd17/> (browse the [archive listing](https://data.sustainable-fsa.com/fsa-counties-dd17/) or [`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd17/_manifest.txt) for a flat index).
+
+Publishing is handled by [`fsa-counties-dd17.R`](fsa-counties-dd17.R) via the shared [`R/s3-archive.R`](R/s3-archive.R) helpers, and runs automatically in GitHub Actions ([`.github/workflows/fsa-counties-dd17.yaml`](.github/workflows/fsa-counties-dd17.yaml)) whenever the script or workflow changes, or on manual dispatch. The workflow authenticates to AWS via GitHub OIDC (no long-lived credentials stored in the repo), re-renders this README, and commits it back to git only if the rendered output changed.
 
 ## 🧾 Field Descriptions
 
@@ -74,7 +82,7 @@ This workflow processes the USDA Farm Service Agency (FSA) county definitions to
 - Project all features to the WGS84 coordinate reference system.
 - Use `rmapshaper::ms_explode()` to break multi-part polygons into single-part features.
 - Recombine features by `id` using `ms_dissolve()` to ensure unique county geometries.
-- Apply `ms_simplify(keep = 0.01)` to reduce geometric complexity while preserving topology.
+- Apply `ms_simplify(keep = 0.008)` to reduce geometric complexity while preserving topology.
 
 #### 4. Clip to Official TIGER/Line Boundaries
 - Download generalized U.S. county boundaries via the `tigris` package:
