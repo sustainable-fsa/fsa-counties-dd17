@@ -41,23 +41,22 @@ Standards.
 
 ## ☁️ Archive Hosting & Automated Publishing
 
-This repository dual-writes its archive: the geodatabase, TopoJSON,
-and Parquet outputs are all committed to git *and* mirrored to S3,
-served via CloudFront at
-<https://data.sustainable-fsa.com/fsa-counties-dd17/> (browse the
-[archive listing](https://data.sustainable-fsa.com/fsa-counties-dd17/)
-or [`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd17/_manifest.txt)
+This repository dual-writes its archive: the geodatabase, TopoJSON, and
+Parquet outputs are all committed to git *and* mirrored to S3, served
+via CloudFront at <https://data.sustainable-fsa.com/fsa-counties-dd17/>
+(browse the [archive
+listing](https://data.sustainable-fsa.com/fsa-counties-dd17/) or
+[`_manifest.txt`](https://data.sustainable-fsa.com/fsa-counties-dd17/_manifest.txt)
 for a flat index).
 
-Publishing is handled by
-[`fsa-counties-dd17.R`](fsa-counties-dd17.R) via the shared
-[`R/s3-archive.R`](R/s3-archive.R) helpers, and runs automatically in
-GitHub Actions
+Publishing is handled by [`fsa-counties-dd17.R`](fsa-counties-dd17.R)
+via the shared [`R/s3-archive.R`](R/s3-archive.R) helpers, and runs
+automatically in GitHub Actions
 ([`.github/workflows/fsa-counties-dd17.yaml`](.github/workflows/fsa-counties-dd17.yaml))
 whenever the script or workflow changes, or on manual dispatch. The
-workflow authenticates to AWS via GitHub OIDC (no long-lived
-credentials stored in the repo), re-renders this README, and commits
-it back to git only if the rendered output changed.
+workflow authenticates to AWS via GitHub OIDC (no long-lived credentials
+stored in the repo), re-renders this README, and commits it back to git
+only if the rendered output changed.
 
 ## 🧾 Field Descriptions
 
