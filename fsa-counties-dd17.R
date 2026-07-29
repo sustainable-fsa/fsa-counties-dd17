@@ -161,8 +161,8 @@ mapshaper \\
 
 unlink("fsa-counties-dd17.geojson")
 
-sf::read_sf("fsa-counties-dd17.topojson", layer = "counties") %>%
-  mapview::mapview()
+# sf::read_sf("fsa-counties-dd17.topojson", layer = "counties") %>%
+#   mapview::mapview()
 
 # Knit the readme
 rmarkdown::render("README.Rmd")
