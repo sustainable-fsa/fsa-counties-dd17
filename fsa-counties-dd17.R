@@ -22,15 +22,19 @@ s3_prefix <- Sys.getenv("S3_PREFIX", unset = "fsa-counties-dd17")
 ## The FSA county definitions
 ## Clean and validate
 counties <-
-  sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
-  dplyr::select(id = FSA_STCOU) %>%
+  "/vsizip/FSA_Counties_dd17.gdb.zip" %>%
   {
-    # Round-trip to geojson to get rid of strange curved geometry
-    tmp <- tempfile(fileext = ".geojson")
-    sf::write_sf(., tmp,
-                 delete_dsn = TRUE)
+    tmp <- tempfile(fileext = ".gpkg")
+    sf::gdal_utils(
+      util = "vectortranslate",
+      source = .,
+      destination = tmp,
+      options = c("-nlt", "CONVERT_TO_LINEAR", "-nlt", "MULTIPOLYGON")
+    )
     sf::read_sf(tmp)
   } %>%
+  dplyr::mutate(id = paste0(FSA_STCOU, "-", FIPS_C)) %>%
+  dplyr::select(id) %>%
   sf::st_transform("WGS84") %>%
   dplyr::group_by(id) %>%
   dplyr::summarise() %>%
@@ -74,7 +78,7 @@ counties <-
   dplyr::left_join(
     sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
       sf::st_drop_geometry() %>%
-      dplyr::mutate(id = FSA_STCOU) %>%
+      dplyr::mutate(id = paste0(FSA_STCOU, "-", FIPS_C)) %>%
       dplyr::arrange(id) %>%
       dplyr::distinct(id, .keep_all = TRUE)
   ) %>%
@@ -132,7 +136,7 @@ counties %>%
   sf::st_cast("MULTIPOLYGON") %>%
   dplyr::arrange(id) %>%
   dplyr::left_join(
-    sf::read_sf("/vsizip/FSA_Counties_dd17.gdb.zip") %>%
+    sf::read_sf("fsa-counties-dd17.parquet") %>%
       sf::st_drop_geometry() %>%
       dplyr::select(id = FSA_STCOU,
                     state = STATENAME,
@@ -157,8 +161,8 @@ mapshaper \\
 
 unlink("fsa-counties-dd17.geojson")
 
-# sf::read_sf("fsa-counties-dd17.topojson", layer = "counties") %>%
-#   mapview::mapview()
+sf::read_sf("fsa-counties-dd17.topojson", layer = "counties") %>%
+  mapview::mapview()
 
 # Knit the readme
 rmarkdown::render("README.Rmd")
