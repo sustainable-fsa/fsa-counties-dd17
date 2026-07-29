@@ -65,7 +65,7 @@ counties %>%
                delete_dsn = TRUE)
 
 out <- rmapshaper::apply_mapshaper_commands("fsa-counties-dd17.geojson", 
-                                            command = "-clean gap-fill-area=0 -drop holes",
+                                            command = "-clean gap-fill-area=500",
                                             sys = TRUE,
                                             sys_mem = 16)
 
@@ -97,6 +97,7 @@ counties %>%
   dplyr::filter(!(FIPSST %in% c("60", "78", "14", "52", "69", "66"))) %>%
   dplyr::select(id = FSA_STCOU) %>%
   rmapshaper::ms_simplify(keep = 0.008,
+                          keep_shapes = TRUE,
                           sys = TRUE,
                           sys_mem = 16) %>%
   rmapshaper::ms_clip(
@@ -156,7 +157,7 @@ mapshaper \\
 
 unlink("fsa-counties-dd17.geojson")
 
-# sf::read_sf("fsa-counties-dd17.topojson", layer = "states") %>%
+# sf::read_sf("fsa-counties-dd17.topojson", layer = "counties") %>%
 #   mapview::mapview()
 
 # Knit the readme
