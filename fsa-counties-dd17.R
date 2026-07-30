@@ -133,7 +133,16 @@ counties %>%
   rmapshaper::ms_dissolve(field = "id",
                           sys = TRUE,
                           sys_mem = 16) %>%
+  sf::st_cast("MULTIPOLYGON") %>% 
+  sf::st_make_valid() %>%
+  sf::st_transform("WGS84") %>%
+  rmapshaper::ms_explode(sys = TRUE,
+                         sys_mem = 16) %>%
+  rmapshaper::ms_dissolve(field = "id",
+                          sys = TRUE,
+                          sys_mem = 16) %>%
   sf::st_cast("MULTIPOLYGON") %>%
+  sf::st_make_valid() %>%
   dplyr::arrange(id) %>%
   dplyr::left_join(
     sf::read_sf("fsa-counties-dd17.parquet") %>%
@@ -154,8 +163,9 @@ mapshaper \\
   -rename-layers counties \\
   -dissolve field=state copy-fields='id' + name=states \\
   -each 'id=id.slice(0,2)' target=states \\
+  -clean target=counties,states \\
   -rename-layers counties,states target=counties,states \\
-  -o format=topojson quantization=1e5 fix-geometry id-field='id' bbox target=* fsa-counties-dd17.topojson
+  -o format=topojson quantization=1e6 fix-geometry id-field='id' bbox target=* fsa-counties-dd17.topojson
 "
 )
 
